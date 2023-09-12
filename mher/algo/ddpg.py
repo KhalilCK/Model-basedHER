@@ -22,7 +22,7 @@ def dims_to_shapes(input_dims):
 class DDPG(object):
     @store_args
     def __init__(self, input_dims, buffer_size, hidden, layers, network_class, polyak, batch_size,
-                 Q_lr, pi_lr, norm_eps, norm_clip, max_u, action_l2, clip_obs, scope, T,
+                 Q_lr, pi_lr, norm_eps, norm_clip, max_u, action_l2, clip_obs, scope, T, traj,
                  rollout_batch_size, subtract_goals, relative_goals, clip_pos_returns, clip_return,
                  sample_transitions, random_sampler, gamma,  n_step, use_dynamic_nstep, 
                  nstep_dynamic_sampler, mb_relabeling_ratio,dynamic_batchsize, dynamic_init, 
@@ -47,6 +47,10 @@ class DDPG(object):
             stage_shapes[key] = (None, *input_shapes[key])
         for key in ['o', 'g']:
             stage_shapes[key + '_2'] = stage_shapes[key]
+            stage_shapes[key + '_3'] = stage_shapes[key]
+            stage_shapes[key + '_4'] = stage_shapes[key]
+            stage_shapes[key + '_5'] = stage_shapes[key]
+            stage_shapes[key + '_6'] = stage_shapes[key]
         stage_shapes['r'] = (None,)
         if self.use_dynamic_nstep:
             stage_shapes['idxs'] = (None, )
@@ -234,7 +238,15 @@ class DDPG(object):
         if update_stats:
             # episode doesn't has key o_2
             episode_batch['o_2'] = episode_batch['o'][:, 1:, :]
+            episode_batch['o_3'] = episode_batch['o'][:, 2:, :]
+            episode_batch['o_4'] = episode_batch['o'][:, 3:, :]
+            episode_batch['o_5'] = episode_batch['o'][:, 4:, :]
+            episode_batch['o_6'] = episode_batch['o'][:, 5:, :]
             episode_batch['ag_2'] = episode_batch['ag'][:, 1:, :]
+            episode_batch['ag_3'] = episode_batch['ag'][:, 2:, :]
+            episode_batch['ag_4'] = episode_batch['ag'][:, 3:, :]
+            episode_batch['ag_5'] = episode_batch['ag'][:, 4:, :]
+            episode_batch['ag_6'] = episode_batch['ag'][:, 5:, :]
             num_normalizing_transitions = transitions_in_episode_batch(episode_batch)
             # add transitions to normalizer
             transitions = self.sample_transitions(episode_batch, num_normalizing_transitions)
@@ -293,20 +305,29 @@ class DDPG(object):
             times = self.dynamic_init 
         for _ in range(times):
             transitions = self.buffer.sample(self.dynamic_batchsize, random=True)
-            loss = self.dynamic_model.update(transitions['o'], transitions['u'], transitions['o_2'])
+            loss = self.dynamic_model.update(transitions['o'], transitions['u'], transitions['o_2'], transitions['o_3'], transitions['o_4'], transitions['o_5'], transitions['o_6'])
 
     def sample_batch(self, method='list'):
         transitions = self.buffer.sample(self.batch_size)   #otherwise only sample from primary buffer
 
-        o, o_2, g = transitions['o'], transitions['o_2'], transitions['g']
-        ag, ag_2 = transitions['ag'], transitions['ag_2']
+        o, o_2, o_3, o_4, o_5, o_6, g = transitions['o'], transitions['o_2'], transitions['o_3'], transitions['o_4'], transitions['o_5'], transitions['o_6'], transitions['g']
+        ag, ag_2 , ag_3 , ag_4 , ag_5 , ag_6 = transitions['ag'], transitions['ag_2'], transitions['ag_3'], transitions['ag_4'], transitions['ag_5'], transitions['ag_6']
         transitions['o'], transitions['g'] = self._preprocess_og(o, ag, g)
         transitions['o_2'], transitions['g_2'] = self._preprocess_og(o_2, ag_2, g)
+        transitions['o_3'], transitions['g_3'] = self._preprocess_og(o_3, ag_3, g)
+        transitions['o_4'], transitions['g_4'] = self._preprocess_og(o_4, ag_4, g)
+        transitions['o_5'], transitions['g_5'] = self._preprocess_og(o_5, ag_5, g)
+        transitions['o_6'], transitions['g_6'] = self._preprocess_og(o_6, ag_6, g)
 
         if 'g' in transitions.keys():
             if len(transitions['g'].shape) == 1:
                 transitions['g'] = transitions['g'].reshape(-1,1)
                 transitions['g_2'] = transitions['g_2'].reshape(-1,1)
+                transitions['g_3'] = transitions['g_3'].reshape(-1, 1)
+                transitions['g_4'] = transitions['g_4'].reshape(-1, 1)
+                transitions['g_5'] = transitions['g_5'].reshape(-1, 1)
+                transitions['g_6'] = transitions['g_6'].reshape(-1, 1)
+
         if method == 'list':
             transitions_batch = [transitions[key] for key in self.stage_shapes.keys()]
         else:
@@ -425,7 +446,7 @@ class DDPG(object):
         self.Q_adam = MpiAdam(self._vars('main/Q'), scale_grad_by_procs=False)
         self.pi_adam = MpiAdam(self._vars('main/pi'), scale_grad_by_procs=False)
 
-        self.dynamic_model = EnsembleForwardDynamics(3, self.dimo, self.dimu)
+        self.dynamic_model = EnsembleForwardDynamics(3, self.dimo, self.dimu, self.traj)
         # polyak averaging
         self.main_vars = self._vars('main/Q') + self._vars('main/pi')
         self.target_vars = self._vars('target/Q') + self._vars('target/pi')

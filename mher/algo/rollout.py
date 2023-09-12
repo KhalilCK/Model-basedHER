@@ -4,6 +4,7 @@ import numpy as np
 
 from mher.algo.util import convert_episode_to_batch_major, store_args
 
+import pickle
 
 class RolloutWorker:
 
@@ -86,8 +87,9 @@ class RolloutWorker:
             success = np.zeros(self.rollout_batch_size)
             # compute new states and observations
             obs_dict_new, reward, done, info = self.venv.step(u)
+
             # if self.render:
-            #     self.venv.render()
+            # self.venv.render()
             o_new = obs_dict_new['observation']
             ag_new = obs_dict_new['achieved_goal']
             success = np.array([i.get('is_success', 0.0) for i in info])
@@ -127,6 +129,8 @@ class RolloutWorker:
                        g=goals,
                        ag=achieved_goals,
                        r=rewards)
+
+
         for key, value in zip(self.info_keys, info_values):
             episode['info_{}'.format(key)] = value
 

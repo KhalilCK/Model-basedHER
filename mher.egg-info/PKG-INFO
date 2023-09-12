@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: mher
+Version: 0.1
+Summary: Model-based Hindsight Experience Replay.
+Home-page: UNKNOWN
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Provides-Extra: all
+Provides-Extra: test
+Provides-Extra: mpi

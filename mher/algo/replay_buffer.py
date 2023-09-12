@@ -48,14 +48,22 @@ class ReplayBuffer:
 
         if 'o_2' not in buffers and 'ag_2' not in buffers:
             buffers['o_2'] = buffers['o'][:, 1:, :]
+            buffers['o_3'] = buffers['o'][:, 2:, :]
+            buffers['o_4'] = buffers['o'][:, 3:, :]
+            buffers['o_5'] = buffers['o'][:, 4:, :]
+            buffers['o_6'] = buffers['o'][:, 5:, :]
             buffers['ag_2'] = buffers['ag'][:, 1:, :]
+            buffers['ag_3'] = buffers['ag'][:, 2:, :]
+            buffers['ag_4'] = buffers['ag'][:, 3:, :]
+            buffers['ag_5'] = buffers['ag'][:, 4:, :]
+            buffers['ag_6'] = buffers['ag'][:, 5:, :]
 
         if random:
             transitions = self.default_sampler(buffers, batch_size, self.info)
         else:
             transitions = self.sample_transitions(buffers, batch_size, self.info)
 
-        for key in (['r', 'o_2', 'ag_2'] + list(self.buffers.keys())):
+        for key in (['r', 'o_2', 'o_3', 'o_4', 'o_5', 'o_6', 'ag_2'] + list(self.buffers.keys())):
             assert key in transitions, "key %s missing from transitions" % key
 
         return transitions
@@ -150,9 +158,17 @@ class SimpleReplayBuffer:
         self.buffers = {}
         self.buffers['o'] = np.empty((self.max_size, state_dim))
         self.buffers['o_2'] = np.empty((self.max_size, state_dim))
+        self.buffers['o_3'] = np.empty((self.max_size, state_dim))
+        self.buffers['o_4'] = np.empty((self.max_size, state_dim))
+        self.buffers['o_5'] = np.empty((self.max_size, state_dim))
+        self.buffers['o_6'] = np.empty((self.max_size, state_dim))
         self.buffers['g'] = np.empty((self.max_size, goal_dim))
         self.buffers['ag'] = np.empty((self.max_size, goal_dim))
         self.buffers['ag_2'] = np.empty((self.max_size, goal_dim))
+        self.buffers['ag_3'] = np.empty((self.max_size, goal_dim))
+        self.buffers['ag_4'] = np.empty((self.max_size, goal_dim))
+        self.buffers['ag_5'] = np.empty((self.max_size, goal_dim))
+        self.buffers['ag_6'] = np.empty((self.max_size, goal_dim))
         self.buffers['r'] = np.empty((self.max_size, 1))
         self.buffers['u'] = np.empty((self.max_size, action_dim))
 

@@ -1,0 +1,2 @@
+epoch,epoch time(min),stats_g/mean,stats_g/std,stats_o/mean,stats_o/std,stats_u/mean,stats_u/std,test/discount_return,test/distance,test/distance_std,test/episode,test/mean_Q,test/return,test/success_rate,train/discount_return,train/distance,train/distance_std,train/episode,train/return,train/success_rate
+0,0.05819219748179118,0.23633713,2.902186,0.10286911,2.7620654,0.0,1.0,1.403460719585719,2.7681997,1.3415709,100.0,0.4908961,2.44,0.07,nan,nan,nan,0.0,nan,nan

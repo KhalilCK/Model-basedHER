@@ -91,7 +91,7 @@ def make_env(env_id, env_type, mpi_rank=0, subrank=0, seed=None, reward_scale=1.
         importlib.import_module(module_name)
     env = gym.make(env_id, **env_kwargs)
 
-    if env_id.startswith('FetchReach'):
+    if env_id.startswith('Fetch'):
         env._max_episode_steps = 100
     elif env_id.startswith('Sawyer'):
         from mher.envs.multi_world_wrapper import SawyerGoalWrapper

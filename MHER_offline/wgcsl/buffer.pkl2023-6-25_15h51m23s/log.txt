@@ -1,0 +1,1191 @@
+Logging to wgcsl/buffer.pkl2023-6-25_15h51m23s
+T: 50
+_Q_lr: 0.0005
+_action_l2: 1.0
+_alpha: 5
+_batch_size: 128
+_buffer_size: 100000
+_clip_obs: 200.0
+_hidden: 256
+_layers: 3
+_max_u: 1.0
+_network_class: wgcsl.algo.actor_critic:ActorCritic
+_norm_clip: 5
+_norm_eps: 0.0001
+_pi_lr: 0.0005
+_polyak: 0.9
+_relative_goals: False
+_scope: wgcsl
+_use_conservation: False
+_use_model_her: True
+_use_supervised: False
+env_name: Point2DLargeEnv-v1
+gamma: 0.98
+make_env: <function prepare_params.<locals>.make_env at 0x7fc05dfb5158>
+mode: model
+n_batches: 1
+n_cycles: 5
+n_test_rollouts: 100
+no_relabel: False
+noise_eps: 0.2
+num_epoch: 50
+random_eps: 0.3
+random_init: 20
+replay_k: 4
+replay_strategy: future
+rollout_batch_size: 1
+su_method: 
+test_with_polyak: False
+wgcsl_params: {'buffer_size': 100000, 'hidden': 256, 'layers': 3, 'network_class': 'wgcsl.algo.actor_critic:ActorCritic', 'polyak': 0.9, 'batch_size': 128, 'Q_lr': 0.0005, 'pi_lr': 0.0005, 'norm_eps': 0.0001, 'norm_clip': 5, 'max_u': 1.0, 'action_l2': 1.0, 'clip_obs': 200.0, 'scope': 'wgcsl', 'relative_goals': False, 'use_supervised': False, 'use_conservation': False, 'use_model_her': True, 'alpha': 5}
+Creating a WGCSL agent with action space 2 x 1.0...
+Start training...
+------------------------------------
+| epoch                 | 0        |
+| epoch time(min)       | 0.0699   |
+| stats_g/mean          | -0.0695  |
+| stats_g/std           | 2.81     |
+| stats_o/mean          | 0.0535   |
+| stats_o/std           | 2.76     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 3.61     |
+| test/distance         | 1.91     |
+| test/distance_std     | 1.07     |
+| test/episode          | 100      |
+| test/mean_Q           | 0.468    |
+| test/return           | 6.3      |
+| test/success_rate     | 0.19     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 1        |
+| epoch time(min)       | 0.0663   |
+| stats_g/mean          | 0.00466  |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0781   |
+| stats_o/std           | 2.79     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 6.95     |
+| test/distance         | 1.12     |
+| test/distance_std     | 0.53     |
+| test/episode          | 200      |
+| test/mean_Q           | 1        |
+| test/return           | 12.8     |
+| test/success_rate     | 0.42     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 2        |
+| epoch time(min)       | 0.0813   |
+| stats_g/mean          | 0.00321  |
+| stats_g/std           | 2.82     |
+| stats_o/mean          | 0.0722   |
+| stats_o/std           | 2.76     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 11.9     |
+| test/distance         | 0.8      |
+| test/distance_std     | 0.384    |
+| test/episode          | 300      |
+| test/mean_Q           | 1.2      |
+| test/return           | 21.9     |
+| test/success_rate     | 0.71     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 3        |
+| epoch time(min)       | 0.0732   |
+| stats_g/mean          | -0.00295 |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0642   |
+| stats_o/std           | 2.76     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 18.3     |
+| test/distance         | 0.429    |
+| test/distance_std     | 0.312    |
+| test/episode          | 400      |
+| test/mean_Q           | 1.56     |
+| test/return           | 32.8     |
+| test/success_rate     | 0.93     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 4        |
+| epoch time(min)       | 0.0592   |
+| stats_g/mean          | 0.00619  |
+| stats_g/std           | 2.82     |
+| stats_o/mean          | 0.0609   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 21.3     |
+| test/distance         | 0.318    |
+| test/distance_std     | 0.188    |
+| test/episode          | 500      |
+| test/mean_Q           | 1.89     |
+| test/return           | 37.6     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 5        |
+| epoch time(min)       | 0.0546   |
+| stats_g/mean          | 0.00643  |
+| stats_g/std           | 2.82     |
+| stats_o/mean          | 0.0665   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.3     |
+| test/distance         | 0.311    |
+| test/distance_std     | 0.183    |
+| test/episode          | 600      |
+| test/mean_Q           | 2.26     |
+| test/return           | 40.1     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 6        |
+| epoch time(min)       | 0.0618   |
+| stats_g/mean          | 0.017    |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.074    |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.8     |
+| test/distance         | 0.442    |
+| test/distance_std     | 0.254    |
+| test/episode          | 700      |
+| test/mean_Q           | 2.51     |
+| test/return           | 40.2     |
+| test/success_rate     | 0.96     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 7        |
+| epoch time(min)       | 0.0597   |
+| stats_g/mean          | 0.00953  |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0574   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25       |
+| test/distance         | 0.22     |
+| test/distance_std     | 0.112    |
+| test/episode          | 800      |
+| test/mean_Q           | 2.75     |
+| test/return           | 42       |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 8        |
+| epoch time(min)       | 0.0553   |
+| stats_g/mean          | 0.0199   |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0587   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.8     |
+| test/distance         | 0.358    |
+| test/distance_std     | 0.245    |
+| test/episode          | 900      |
+| test/mean_Q           | 3.02     |
+| test/return           | 41.9     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 9        |
+| epoch time(min)       | 0.0594   |
+| stats_g/mean          | 0.0144   |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0518   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.6     |
+| test/distance         | 0.392    |
+| test/distance_std     | 0.211    |
+| test/episode          | 1e+03    |
+| test/mean_Q           | 3.63     |
+| test/return           | 41.6     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 10       |
+| epoch time(min)       | 0.0597   |
+| stats_g/mean          | 0.0156   |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0532   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.5     |
+| test/distance         | 0.184    |
+| test/distance_std     | 0.0884   |
+| test/episode          | 1.1e+03  |
+| test/mean_Q           | 3.74     |
+| test/return           | 41.4     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 11       |
+| epoch time(min)       | 0.0635   |
+| stats_g/mean          | 0.0174   |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0556   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.7     |
+| test/distance         | 0.231    |
+| test/distance_std     | 0.154    |
+| test/episode          | 1.2e+03  |
+| test/mean_Q           | 4.1      |
+| test/return           | 40.5     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 12       |
+| epoch time(min)       | 0.0589   |
+| stats_g/mean          | 0.0126   |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0532   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23       |
+| test/distance         | 0.386    |
+| test/distance_std     | 0.192    |
+| test/episode          | 1.3e+03  |
+| test/mean_Q           | 4.57     |
+| test/return           | 39.8     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 13       |
+| epoch time(min)       | 0.0554   |
+| stats_g/mean          | 0.0063   |
+| stats_g/std           | 2.83     |
+| stats_o/mean          | 0.0475   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.6     |
+| test/distance         | 0.394    |
+| test/distance_std     | 0.216    |
+| test/episode          | 1.4e+03  |
+| test/mean_Q           | 5.04     |
+| test/return           | 40.4     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 14       |
+| epoch time(min)       | 0.0637   |
+| stats_g/mean          | 0.0161   |
+| stats_g/std           | 2.84     |
+| stats_o/mean          | 0.0581   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.9     |
+| test/distance         | 0.28     |
+| test/distance_std     | 0.164    |
+| test/episode          | 1.5e+03  |
+| test/mean_Q           | 5.12     |
+| test/return           | 40.8     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 15       |
+| epoch time(min)       | 0.0611   |
+| stats_g/mean          | 0.0161   |
+| stats_g/std           | 2.84     |
+| stats_o/mean          | 0.0557   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.3     |
+| test/distance         | 0.472    |
+| test/distance_std     | 0.221    |
+| test/episode          | 1.6e+03  |
+| test/mean_Q           | 5.62     |
+| test/return           | 40       |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 16       |
+| epoch time(min)       | 0.064    |
+| stats_g/mean          | 0.0147   |
+| stats_g/std           | 2.84     |
+| stats_o/mean          | 0.0514   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 22.4     |
+| test/distance         | 0.48     |
+| test/distance_std     | 0.284    |
+| test/episode          | 1.7e+03  |
+| test/mean_Q           | 6.24     |
+| test/return           | 38.2     |
+| test/success_rate     | 0.94     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 17       |
+| epoch time(min)       | 0.0598   |
+| stats_g/mean          | 0.0184   |
+| stats_g/std           | 2.85     |
+| stats_o/mean          | 0.0545   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 22.9     |
+| test/distance         | 0.408    |
+| test/distance_std     | 0.21     |
+| test/episode          | 1.8e+03  |
+| test/mean_Q           | 6.23     |
+| test/return           | 39.6     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 18       |
+| epoch time(min)       | 0.0606   |
+| stats_g/mean          | 0.0209   |
+| stats_g/std           | 2.85     |
+| stats_o/mean          | 0.0556   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.3     |
+| test/distance         | 0.383    |
+| test/distance_std     | 0.231    |
+| test/episode          | 1.9e+03  |
+| test/mean_Q           | 6.78     |
+| test/return           | 40       |
+| test/success_rate     | 0.99     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 19       |
+| epoch time(min)       | 0.061    |
+| stats_g/mean          | 0.0221   |
+| stats_g/std           | 2.85     |
+| stats_o/mean          | 0.0545   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 21.6     |
+| test/distance         | 0.634    |
+| test/distance_std     | 0.273    |
+| test/episode          | 2e+03    |
+| test/mean_Q           | 7.69     |
+| test/return           | 36.7     |
+| test/success_rate     | 0.88     |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 20       |
+| epoch time(min)       | 0.062    |
+| stats_g/mean          | 0.0207   |
+| stats_g/std           | 2.85     |
+| stats_o/mean          | 0.0529   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.3     |
+| test/distance         | 0.405    |
+| test/distance_std     | 0.213    |
+| test/episode          | 2.1e+03  |
+| test/mean_Q           | 8.22     |
+| test/return           | 41.3     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 21       |
+| epoch time(min)       | 0.0603   |
+| stats_g/mean          | 0.0272   |
+| stats_g/std           | 2.85     |
+| stats_o/mean          | 0.0567   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.3     |
+| test/distance         | 0.374    |
+| test/distance_std     | 0.193    |
+| test/episode          | 2.2e+03  |
+| test/mean_Q           | 7.9      |
+| test/return           | 40.1     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 22       |
+| epoch time(min)       | 0.0685   |
+| stats_g/mean          | 0.0251   |
+| stats_g/std           | 2.85     |
+| stats_o/mean          | 0.0577   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.8     |
+| test/distance         | 0.422    |
+| test/distance_std     | 0.234    |
+| test/episode          | 2.3e+03  |
+| test/mean_Q           | 8.4      |
+| test/return           | 40.7     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 23       |
+| epoch time(min)       | 0.0639   |
+| stats_g/mean          | 0.0265   |
+| stats_g/std           | 2.85     |
+| stats_o/mean          | 0.0593   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 23.9     |
+| test/distance         | 0.383    |
+| test/distance_std     | 0.167    |
+| test/episode          | 2.4e+03  |
+| test/mean_Q           | 8.61     |
+| test/return           | 40.8     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 24       |
+| epoch time(min)       | 0.0558   |
+| stats_g/mean          | 0.0228   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0549   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.6     |
+| test/distance         | 0.219    |
+| test/distance_std     | 0.117    |
+| test/episode          | 2.5e+03  |
+| test/mean_Q           | 9.29     |
+| test/return           | 41.6     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 25       |
+| epoch time(min)       | 0.0549   |
+| stats_g/mean          | 0.0313   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0617   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.7     |
+| test/distance         | 0.347    |
+| test/distance_std     | 0.144    |
+| test/episode          | 2.6e+03  |
+| test/mean_Q           | 9.54     |
+| test/return           | 41.7     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 26       |
+| epoch time(min)       | 0.0561   |
+| stats_g/mean          | 0.0308   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.061    |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.4     |
+| test/distance         | 0.413    |
+| test/distance_std     | 0.195    |
+| test/episode          | 2.7e+03  |
+| test/mean_Q           | 10.2     |
+| test/return           | 41.4     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 27       |
+| epoch time(min)       | 0.0556   |
+| stats_g/mean          | 0.0298   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0594   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.6     |
+| test/distance         | 0.316    |
+| test/distance_std     | 0.152    |
+| test/episode          | 2.8e+03  |
+| test/mean_Q           | 10.9     |
+| test/return           | 41.7     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 28       |
+| epoch time(min)       | 0.0554   |
+| stats_g/mean          | 0.0316   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0607   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 24.6     |
+| test/distance         | 0.25     |
+| test/distance_std     | 0.123    |
+| test/episode          | 2.9e+03  |
+| test/mean_Q           | 11.1     |
+| test/return           | 41.7     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 29       |
+| epoch time(min)       | 0.0555   |
+| stats_g/mean          | 0.0372   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0634   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.8     |
+| test/distance         | 0.304    |
+| test/distance_std     | 0.181    |
+| test/episode          | 3e+03    |
+| test/mean_Q           | 11.3     |
+| test/return           | 43       |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 30       |
+| epoch time(min)       | 0.056    |
+| stats_g/mean          | 0.0349   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0604   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.9     |
+| test/distance         | 0.295    |
+| test/distance_std     | 0.166    |
+| test/episode          | 3.1e+03  |
+| test/mean_Q           | 12       |
+| test/return           | 43.1     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 31       |
+| epoch time(min)       | 0.0554   |
+| stats_g/mean          | 0.0344   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0586   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.3     |
+| test/distance         | 0.223    |
+| test/distance_std     | 0.0989   |
+| test/episode          | 3.2e+03  |
+| test/mean_Q           | 12.4     |
+| test/return           | 42.5     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 32       |
+| epoch time(min)       | 0.0559   |
+| stats_g/mean          | 0.0327   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0562   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.5     |
+| test/distance         | 0.215    |
+| test/distance_std     | 0.0909   |
+| test/episode          | 3.3e+03  |
+| test/mean_Q           | 12.8     |
+| test/return           | 42.7     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 33       |
+| epoch time(min)       | 0.0556   |
+| stats_g/mean          | 0.0343   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0586   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.8     |
+| test/distance         | 0.269    |
+| test/distance_std     | 0.143    |
+| test/episode          | 3.4e+03  |
+| test/mean_Q           | 12.5     |
+| test/return           | 43       |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 34       |
+| epoch time(min)       | 0.0558   |
+| stats_g/mean          | 0.0356   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0591   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.9     |
+| test/distance         | 0.173    |
+| test/distance_std     | 0.079    |
+| test/episode          | 3.5e+03  |
+| test/mean_Q           | 13.2     |
+| test/return           | 43.1     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 35       |
+| epoch time(min)       | 0.056    |
+| stats_g/mean          | 0.0348   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0569   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.3     |
+| test/distance         | 0.215    |
+| test/distance_std     | 0.116    |
+| test/episode          | 3.6e+03  |
+| test/mean_Q           | 13.8     |
+| test/return           | 43.6     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 36       |
+| epoch time(min)       | 0.056    |
+| stats_g/mean          | 0.0362   |
+| stats_g/std           | 2.87     |
+| stats_o/mean          | 0.0599   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.4     |
+| test/distance         | 0.239    |
+| test/distance_std     | 0.121    |
+| test/episode          | 3.7e+03  |
+| test/mean_Q           | 14.5     |
+| test/return           | 43.7     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 37       |
+| epoch time(min)       | 0.0559   |
+| stats_g/mean          | 0.0322   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0567   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26       |
+| test/distance         | 0.228    |
+| test/distance_std     | 0.123    |
+| test/episode          | 3.8e+03  |
+| test/mean_Q           | 14.8     |
+| test/return           | 43.2     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 38       |
+| epoch time(min)       | 0.0554   |
+| stats_g/mean          | 0.0325   |
+| stats_g/std           | 2.87     |
+| stats_o/mean          | 0.0584   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.8     |
+| test/distance         | 0.151    |
+| test/distance_std     | 0.0913   |
+| test/episode          | 3.9e+03  |
+| test/mean_Q           | 15.3     |
+| test/return           | 43       |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 39       |
+| epoch time(min)       | 0.0612   |
+| stats_g/mean          | 0.03     |
+| stats_g/std           | 2.87     |
+| stats_o/mean          | 0.0564   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.7     |
+| test/distance         | 0.243    |
+| test/distance_std     | 0.114    |
+| test/episode          | 4e+03    |
+| test/mean_Q           | 15.5     |
+| test/return           | 44       |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 40       |
+| epoch time(min)       | 0.0622   |
+| stats_g/mean          | 0.0283   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0537   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26       |
+| test/distance         | 0.197    |
+| test/distance_std     | 0.123    |
+| test/episode          | 4.1e+03  |
+| test/mean_Q           | 15.7     |
+| test/return           | 43.2     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 41       |
+| epoch time(min)       | 0.0644   |
+| stats_g/mean          | 0.0302   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0561   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.1     |
+| test/distance         | 0.222    |
+| test/distance_std     | 0.143    |
+| test/episode          | 4.2e+03  |
+| test/mean_Q           | 15.9     |
+| test/return           | 43.3     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 42       |
+| epoch time(min)       | 0.0645   |
+| stats_g/mean          | 0.0307   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0575   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.2     |
+| test/distance         | 0.22     |
+| test/distance_std     | 0.107    |
+| test/episode          | 4.3e+03  |
+| test/mean_Q           | 16.6     |
+| test/return           | 43.4     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 43       |
+| epoch time(min)       | 0.0636   |
+| stats_g/mean          | 0.0323   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0588   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.8     |
+| test/distance         | 0.214    |
+| test/distance_std     | 0.143    |
+| test/episode          | 4.4e+03  |
+| test/mean_Q           | 17.1     |
+| test/return           | 43       |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 44       |
+| epoch time(min)       | 0.0579   |
+| stats_g/mean          | 0.0283   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0563   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.2     |
+| test/distance         | 0.132    |
+| test/distance_std     | 0.0868   |
+| test/episode          | 4.5e+03  |
+| test/mean_Q           | 17.5     |
+| test/return           | 43.5     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 45       |
+| epoch time(min)       | 0.0567   |
+| stats_g/mean          | 0.0263   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0556   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 25.9     |
+| test/distance         | 0.174    |
+| test/distance_std     | 0.123    |
+| test/episode          | 4.6e+03  |
+| test/mean_Q           | 17.7     |
+| test/return           | 43.1     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 46       |
+| epoch time(min)       | 0.0591   |
+| stats_g/mean          | 0.0268   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0555   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.2     |
+| test/distance         | 0.151    |
+| test/distance_std     | 0.104    |
+| test/episode          | 4.7e+03  |
+| test/mean_Q           | 17.9     |
+| test/return           | 43.5     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 47       |
+| epoch time(min)       | 0.0649   |
+| stats_g/mean          | 0.0271   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0561   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.4     |
+| test/distance         | 0.25     |
+| test/distance_std     | 0.123    |
+| test/episode          | 4.8e+03  |
+| test/mean_Q           | 18.2     |
+| test/return           | 43.6     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 48       |
+| epoch time(min)       | 0.0627   |
+| stats_g/mean          | 0.0264   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0549   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.1     |
+| test/distance         | 0.158    |
+| test/distance_std     | 0.0918   |
+| test/episode          | 4.9e+03  |
+| test/mean_Q           | 18.6     |
+| test/return           | 43.3     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------
+------------------------------------
+| epoch                 | 49       |
+| epoch time(min)       | 0.0589   |
+| stats_g/mean          | 0.0258   |
+| stats_g/std           | 2.86     |
+| stats_o/mean          | 0.0541   |
+| stats_o/std           | 2.75     |
+| stats_u/mean          | 0        |
+| stats_u/std           | 1        |
+| test/discount_return  | 26.2     |
+| test/distance         | 0.173    |
+| test/distance_std     | 0.13     |
+| test/episode          | 5e+03    |
+| test/mean_Q           | 18.7     |
+| test/return           | 43.5     |
+| test/success_rate     | 1        |
+| train/discount_return | nan      |
+| train/distance        | nan      |
+| train/distance_std    | nan      |
+| train/episode         | 0        |
+| train/return          | nan      |
+| train/success_rate    | nan      |
+------------------------------------

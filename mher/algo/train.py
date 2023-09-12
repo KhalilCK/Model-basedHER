@@ -11,6 +11,7 @@ from mher.common.mpi_moments import mpi_moments
 import mher.algo.config as config
 from mher.algo.rollout import RolloutWorker
 from mher.algo.util import dump_params
+import csv
 
 def mpi_average(value):
     if not isinstance(value, list):
@@ -58,6 +59,18 @@ def train(*, policy, rollout_worker, evaluator,
             for j in range(n_batches):   
                 policy.train()
             policy.update_target_net()
+
+        """u_reshaped = np.reshape(episode.get('u'), (99, 2))
+        o_reshaped = np.reshape(episode.get('o_2'), (99, 11))
+
+        combined_array = np.concatenate((u_reshaped, o_reshaped), axis=1)
+
+        file_path = "combineuo.csv"
+
+        with open(file_path, mode='w', newline='') as file:
+            writer = csv.writer(file)
+
+            writer.writerows(combined_array)"""
 
         # test
         evaluator.clear_history()

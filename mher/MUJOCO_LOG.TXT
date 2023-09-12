@@ -1,0 +1,21 @@
+Mon Jun 19 17:59:13 2023
+ERROR: GLEW initalization error: Unknown error
+
+Mon Jun 19 18:00:13 2023
+ERROR: GLEW initalization error: Unknown error
+
+Mon Jun 19 18:09:02 2023
+ERROR: GLEW initalization error: Unknown error
+
+Mon Jun 19 18:12:19 2023
+ERROR: GLEW initalization error: Unknown error
+
+Tue Jun 20 02:34:02 2023
+ERROR: GLEW initalization error: Unknown error
+
+Tue Jun 20 02:34:15 2023
+ERROR: GLEW initalization error: Unknown error
+
+Tue Jun 20 02:35:48 2023
+ERROR: GLEW initalization error: Unknown error
+
