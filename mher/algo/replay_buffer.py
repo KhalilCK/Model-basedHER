@@ -4,7 +4,7 @@ import numpy as np
 
 
 class ReplayBuffer:
-    def __init__(self, buffer_shapes, size_in_transitions, T, sample_transitions, default_sampler, info=None): 
+    def __init__(self, buffer_shapes, size_in_transitions, T, sample_transitions, default_sampler, info=None):
         """Creates a replay buffer.
 
         Args:
@@ -36,7 +36,7 @@ class ReplayBuffer:
         with self.lock:
             return self.current_size == self.size
 
-    def sample(self, batch_size, random=False):
+    def sample(self, batch_size, n, random=False):
         """Returns a dict {key: array(batch_size x shapes[key])}
         """
         buffers = {}
@@ -47,23 +47,22 @@ class ReplayBuffer:
                 buffers[key] = self.buffers[key][:self.current_size]
 
         if 'o_2' not in buffers and 'ag_2' not in buffers:
-            buffers['o_2'] = buffers['o'][:, 1:, :]
-            buffers['o_3'] = buffers['o'][:, 2:, :]
-            buffers['o_4'] = buffers['o'][:, 3:, :]
-            buffers['o_5'] = buffers['o'][:, 4:, :]
-            buffers['o_6'] = buffers['o'][:, 5:, :]
-            buffers['ag_2'] = buffers['ag'][:, 1:, :]
-            buffers['ag_3'] = buffers['ag'][:, 2:, :]
-            buffers['ag_4'] = buffers['ag'][:, 3:, :]
-            buffers['ag_5'] = buffers['ag'][:, 4:, :]
-            buffers['ag_6'] = buffers['ag'][:, 5:, :]
+            for i in range(2, (n+2)):
+                buffers[f'o_{i}'] = buffers['o'][:, i-1:, :]
+                buffers[f'ag_{i}'] = buffers['ag'][:, i-1:, :]
+
 
         if random:
-            transitions = self.default_sampler(buffers, batch_size, self.info)
+            transitions = self.default_sampler(buffers, batch_size, n, self.info)
         else:
-            transitions = self.sample_transitions(buffers, batch_size, self.info)
+            transitions = self.sample_transitions(buffers, batch_size, n, self.info)
 
-        for key in (['r', 'o_2', 'o_3', 'o_4', 'o_5', 'o_6', 'ag_2'] + list(self.buffers.keys())):
+        k = []
+        k.append('r')
+        k.append('ag_2')
+        for i in range (2,n+1):
+            k.append(f'o_{i}')
+        for key in (k + list(self.buffers.keys())):
             assert key in transitions, "key %s missing from transitions" % key
 
         return transitions
@@ -151,24 +150,17 @@ class ReplayBuffer:
 
         
 class SimpleReplayBuffer:
-    def __init__(self, size, state_dim, goal_dim, action_dim): 
+    def __init__(self, size, state_dim, goal_dim, action_dim, n):
         """Creates a simple replay buffer.
         """
         self.max_size = size
         self.buffers = {}
         self.buffers['o'] = np.empty((self.max_size, state_dim))
-        self.buffers['o_2'] = np.empty((self.max_size, state_dim))
-        self.buffers['o_3'] = np.empty((self.max_size, state_dim))
-        self.buffers['o_4'] = np.empty((self.max_size, state_dim))
-        self.buffers['o_5'] = np.empty((self.max_size, state_dim))
-        self.buffers['o_6'] = np.empty((self.max_size, state_dim))
+        for i in range(2, (n+2)):
+            self.buffers[f'o_{i}'] = np.empty((self.max_size, state_dim))
+            self.buffers[f'ag_{i}'] = np.empty((self.max_size, goal_dim))
         self.buffers['g'] = np.empty((self.max_size, goal_dim))
         self.buffers['ag'] = np.empty((self.max_size, goal_dim))
-        self.buffers['ag_2'] = np.empty((self.max_size, goal_dim))
-        self.buffers['ag_3'] = np.empty((self.max_size, goal_dim))
-        self.buffers['ag_4'] = np.empty((self.max_size, goal_dim))
-        self.buffers['ag_5'] = np.empty((self.max_size, goal_dim))
-        self.buffers['ag_6'] = np.empty((self.max_size, goal_dim))
         self.buffers['r'] = np.empty((self.max_size, 1))
         self.buffers['u'] = np.empty((self.max_size, action_dim))
 
