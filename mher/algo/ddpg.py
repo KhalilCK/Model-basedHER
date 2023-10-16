@@ -22,7 +22,7 @@ def dims_to_shapes(input_dims):
 class DDPG(object):
     @store_args
     def __init__(self, input_dims, buffer_size, hidden, layers, network_class, polyak, batch_size,
-                 Q_lr, pi_lr, norm_eps, norm_clip, max_u, action_l2, clip_obs, scope, T, traj, n,
+                 Q_lr, pi_lr, norm_eps, norm_clip, max_u, action_l2, clip_obs, scope, T, method, n,
                  rollout_batch_size, subtract_goals, relative_goals, clip_pos_returns, clip_return,
                  sample_transitions, random_sampler, gamma,  n_step, use_dynamic_nstep, 
                  nstep_dynamic_sampler, mb_relabeling_ratio,dynamic_batchsize, dynamic_init, 
@@ -433,7 +433,7 @@ class DDPG(object):
         self.Q_adam = MpiAdam(self._vars('main/Q'), scale_grad_by_procs=False)
         self.pi_adam = MpiAdam(self._vars('main/pi'), scale_grad_by_procs=False)
 
-        self.dynamic_model = EnsembleForwardDynamics(3, self.dimo, self.dimu, self.traj, self.n)
+        self.dynamic_model = EnsembleForwardDynamics(3, self.dimo, self.dimu, self.method, self.n)
         # polyak averaging
         self.main_vars = self._vars('main/Q') + self._vars('main/pi')
         self.target_vars = self._vars('target/Q') + self._vars('target/pi')

@@ -286,7 +286,7 @@ def configure_ddpg(dims, params, reuse=False, use_mpi=True, clip_return=True):
     ddpg_params.update({'input_dims': input_dims,  # agent takes an input observations
                         'T': params['T'],
                         'n': params['nt'],
-                        'traj' : params['traj'],
+                        'method' : params['method'],
                         'clip_pos_returns': True,  # clip positive returns
                         'clip_return': (1. / (1. - params['gamma'])) if clip_return else np.inf,  # max abs of return 
                         'rollout_batch_size': rollout_batch_size,

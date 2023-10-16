@@ -188,7 +188,7 @@ def make_sample_her_transitions(replay_strategy, replay_k, reward_fun, obs_to_go
         transitions['u'] = np.concatenate(actions_list,axis=0).reshape(batch_size * steps, -1)
         return transitions
 
-    def _dynamic_interaction(o, g, action_fun, dynamic_model, steps, act_noise=0):
+    def _dynamic_interaction(o, g, action_fun, dynamic_model, steps, transitions, n, act_noise=0):
         last_state = o.copy()
         next_states_list = []
         for _ in range(0, steps):
@@ -197,7 +197,7 @@ def make_sample_her_transitions(replay_strategy, replay_k, reward_fun, obs_to_go
                 action_array += np.random.normal(scale=act_noise, size=action_array.shape)
                 action_array = np.clip(action_array, -1,1)
 
-            next_state_array = dynamic_model.predict_next_state(last_state, action_array)
+            next_state_array = dynamic_model.predict_next_state(last_state, action_array, transitions, n)
             next_states_list.append(next_state_array.copy())
             last_state = next_state_array
         return next_states_list
@@ -258,7 +258,7 @@ def make_sample_her_transitions(replay_strategy, replay_k, reward_fun, obs_to_go
         # model-based relabeling
         last_state = transitions['o_2'].copy()  
         if dynamic_ag_ratio_cur > 0:
-            next_states_list = _dynamic_interaction(last_state, transitions['g'], action_fun, dynamic_model, steps, act_noise=0.2)
+            next_states_list = _dynamic_interaction(last_state, transitions['g'], action_fun, dynamic_model, steps, transitions, n, act_noise=0.2)
             next_states_list.insert(0, last_state.copy())
             next_states_array = np.concatenate(next_states_list,axis=1).reshape(batch_size, steps+1, -1) 
             step_idx = np.random.randint(next_states_array.shape[1], size=(batch_size))

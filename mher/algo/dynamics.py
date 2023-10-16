@@ -104,7 +104,7 @@ def _vars(scope):
 # numpy forward dynamics
 class ForwardDynamicsNumpy:
     @store_args
-    def __init__(self, dimo, dimu, t, n, clip_norm=5, norm_eps=1e-4, hidden=256, layers=4, learning_rate=1e-3, name='1'):
+    def __init__(self, dimo, dimu, method, n, clip_norm=5, norm_eps=1e-4, hidden=256, layers=4, learning_rate=1e-3, name='1'):
         self.obs_normalizer = NormalizerNumpy(size=dimo, eps=norm_eps)
         self.action_normalizer = NormalizerNumpy(size=dimu, eps=norm_eps)
         self.sess = U.get_session()
@@ -119,16 +119,16 @@ class ForwardDynamicsNumpy:
 
             self.dynamics_scope = tf.get_variable_scope().name
             input = tf.concat(values=[self.obs_norm[0], self.actions_norm], axis=-1)
-            if (t==1):
+            if (method=='lstm'):
                 self.next_state_diff_tf = lstm(input, [hidden] * layers + [self.dimo])
                 self.next_state_norm_tf = self.next_state_diff_tf + self.obs_norm[0]
                 # loss functions
                 self.per_sample_loss_tf = tf.reduce_mean(tf.abs(self.next_state_diff_tf - self.obs_norm[1] + self.obs_norm[0]), axis=1)
-            elif (t==2):
+            elif (method=='multi'):
                 self.next_state_diff_tf = nnlstm(input, [hidden] * layers + [self.dimo], n)
                 self.next_state_norm_tfs = []
                 for i in range(n):
-                    next_state_norm_tfi = self.next_state_diff_tf[:,int(i*self.next_state_diff_tf.shape[1].value / n):int((i+1) * (self.next_state_diff_tf.shape[1].value / n))] + self.obs_norm[0]
+                    next_state_norm_tfi = self.next_state_diff_tf[:,int(i*self.next_state_diff_tf.shape[1].value / n):int((i+1) * (self.next_state_diff_tf.shape[1].value / n))] + self.obs_norm[i]
                     self.next_state_norm_tfs.append(next_state_norm_tfi)
                 self.next_state_norm_tf = sum(self.next_state_norm_tfs)/n
 
@@ -138,7 +138,7 @@ class ForwardDynamicsNumpy:
                     next_state_loss_tfi = tf.reduce_mean(tf.abs(self.next_state_diff_tf[:,int(i*(self.next_state_diff_tf.shape[1].value / n)):int((i+1) * (self.next_state_diff_tf.shape[1].value / n))] - self.obs_norm[i+1]+ self.obs_norm[i]), axis=1)
                     self.next_state_loss_tfs.append(next_state_loss_tfi)
                 self.per_sample_loss_tf = sum(self.next_state_loss_tfs) / n
-            elif (t==3):
+            elif (method=='avg'):
                 self.next_state_diff_tf = nnlstm(input, [hidden] * layers + [self.dimo], n)
                 self.next_state_norm_tfs = []
                 for i in range(n):
@@ -149,18 +149,10 @@ class ForwardDynamicsNumpy:
                 # loss functions
                 self.next_state_loss_tfs = []
                 for i in range(n):
-                    next_state_loss_tfi = tf.reduce_mean(tf.abs(self.next_state_diff_tf[:,int(i*(self.next_state_diff_tf.shape[1].value / n)):int((i+1) * (self.next_state_diff_tf.shape[1].value / n))] - self.obs_norm[i+1]+ self.obs_norm[0]), axis=1)
+                    next_state_loss_tfi = tf.reduce_mean(tf.abs(self.next_state_diff_tf[:,int(i*(self.next_state_diff_tf.shape[1].value / n)):int((i+1) * (self.next_state_diff_tf.shape[1].value / n))] - self.obs_norm[1]+ self.obs_norm[0]), axis=1)
                     self.next_state_loss_tfs.append(next_state_loss_tfi)
                 self.per_sample_loss_tf = sum(self.next_state_loss_tfs) / n
-            elif (t==4):
-                self.next_state_diff_tf = nnlstm(input, [hidden] * layers + [self.dimo], n)
-                self.next_state_norm_tf = self.next_state_diff_tf[:,int((n-1) * (self.next_state_diff_tf.shape[1].value / n)):int(self.next_state_diff_tf.shape[1].value)] + self.obs_norm[0]
-                self.per_sample_loss_tf = tf.reduce_mean(tf.abs(self.next_state_diff_tf[:, int((n-1) * (self.next_state_diff_tf.shape[1].value / n)):int(n * (self.next_state_diff_tf.shape[1].value / n))] - self.obs_norm[n] + self.obs_norm[4]), axis=1)
-            elif (t==5):
-                self.next_state_diff_tf = nnlstm(input, [hidden] * layers + [self.dimo], n)
-                self.next_state_norm_tf = self.next_state_diff_tf[:,int((n-1) * (self.next_state_diff_tf.shape[1].value / n)):int(self.next_state_diff_tf.shape[1].value)] + self.obs_norm[0]
-                self.per_sample_loss_tf = tf.reduce_mean(tf.abs(self.next_state_diff_tf[:, int((n-1) * (self.next_state_diff_tf.shape[1].value / n)):int(n * (self.next_state_diff_tf.shape[1].value / n))] - self.obs_norm[n] + self.obs_norm[0]), axis=1)
-            else:
+            elif (method == 'default'):
                 self.next_state_diff_tf = nn(input, [hidden] * layers + [self.dimo])
                 self.next_state_norm_tf = self.next_state_diff_tf + self.obs_norm[0]
                 # loss functions
@@ -175,13 +167,20 @@ class ForwardDynamicsNumpy:
         tf.variables_initializer(_vars(self.dynamics_scope)).run()
         self.dynamics_adam.sync()
 
-    def predict_next_state(self, obs0, actions):
+    def predict_next_state(self, obs0, actions, transitions, n):
         obs0_norm = self.obs_normalizer.normalize(obs0)
+        obs_norm = []
+        obs_norm.append(obs0_norm)
+        for i in range(2, (n + 2)):
+            obsi_norm = self.obs_normalizer.normalize(transitions[f'o_{i}'])
+            obs_norm.append(obsi_norm)
+        self.action_normalizer.update(actions)
         action_norm = self.action_normalizer.normalize(actions)
-        obs1 = self.sess.run(self.next_state_norm_tf, feed_dict={
-            self.obs_norm[0]: obs0_norm,
-            self.actions_norm:action_norm
-        })
+        feed_dict = {self.actions_norm: action_norm}
+
+        for i in range(n + 1):
+            feed_dict[self.obs_norm[i]] = obs_norm[i]
+        obs1 = self.sess.run(self.next_state_norm_tf, feed_dict=feed_dict)
         obs1_norm = self.obs_normalizer.denormalize(obs1)
         return obs1_norm
 
@@ -217,29 +216,29 @@ class ForwardDynamicsNumpy:
 
 class EnsembleForwardDynamics:
     @store_args
-    def __init__(self, num_models, dimo, dimu, t, n, clip_norm=5, norm_eps=1e-4, hidden=256, layers=4, learning_rate=1e-3):
+    def __init__(self, num_models, dimo, dimu, method, n, clip_norm=5, norm_eps=1e-4, hidden=256, layers=4, learning_rate=1e-3):
         self.num_models = num_models
         self.models = []
         for i in range(num_models):
-            self.models.append(ForwardDynamicsNumpy(dimo, dimu, t, n, clip_norm, norm_eps, hidden, layers, learning_rate, name=str(i)))
+            self.models.append(ForwardDynamicsNumpy(dimo, dimu, method, n, clip_norm, norm_eps, hidden, layers, learning_rate, name=str(i)))
 
-    def predict_next_state(self, obs0, actions, mode='mean'):
+    def predict_next_state(self, obs0, actions, transitions, n, mode='mean'):
         # random select prediciton or mean prediction
         if mode == 'random':
             idx = int(np.random.random() * self.num_models)
             model = self.models[idx]
-            result = model.predict_next_state(obs0, actions)
+            result = model.predict_next_state(obs0, actions, transitions, n)
         elif mode == 'mean':
             res = []
             for model in self.models:
-                res.append(model.predict_next_state(obs0, actions))
+                res.append(model.predict_next_state(obs0, actions, transitions, n))
 
             result_array = np.array(res).transpose([1,0,2])
             result = result_array.mean(axis=1)
         elif mode == 'mean_std':
             res = []
             for model in self.models:
-                res.append(model.predict_next_state(obs0, actions))
+                res.append(model.predict_next_state(obs0, actions, transitions, n))
             result_array = np.array(res).transpose([1,0,2])
             result = result_array.mean(axis=1)
             std = result_array.std(axis=1).sum(axis=1)
